@@ -392,9 +392,9 @@ class TcpConn(
                             TlsSni.NotTls -> {
                                 val bytes = pending.toByteArray()
                                 when (HttpProxyRequest.classify(bytes)) {
-                                    HttpProxyRequest.HTTP -> decide(true, true)
-                                    HttpProxyRequest.NOT_HTTP -> decide(true, false)
-                                    HttpProxyRequest.NEED_MORE -> if (pending.size() >= PENDING_CAP) decide(true, false)
+                                    HttpProxyRequest.Kind.HTTP -> decide(true, true)
+                                    HttpProxyRequest.Kind.NOT_HTTP -> decide(true, false)
+                                    HttpProxyRequest.Kind.NEED_MORE -> if (pending.size() >= PENDING_CAP) decide(true, false)
                                 }
                             }
                             TlsSni.NoSni -> decide(true, false)
